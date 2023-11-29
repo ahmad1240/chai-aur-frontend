@@ -1,18 +1,16 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { login as authLogin } from "../store/authSlice";
+import { Button, Input, Logo } from "./index";
 import { useDispatch } from "react-redux";
 import authService from "../appwrite/auth";
 import { useForm } from "react-hook-form";
-import Input from "./Input";
 
-import Logo from "./Logo";
-import Button from "./Button";
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-  const [error, setError] = useState();
+  const [error, setError] = useState("");
 
   const login = async (data) => {
     setError("");
@@ -27,6 +25,7 @@ function Login() {
       setError(error.message);
     }
   };
+
   return (
     <div className="flex items-center justify-center w-full">
       <div
@@ -53,7 +52,7 @@ function Login() {
         <form onSubmit={handleSubmit(login)} className="mt-8">
           <div className="space-y-5">
             <Input
-              label="Email:"
+              label="Email: "
               placeholder="Enter your email"
               type="email"
               {...register("email", {
@@ -66,9 +65,9 @@ function Login() {
               })}
             />
             <Input
-              label="Password"
+              label="Password: "
               type="password"
-              placeholder="Enter Your Password"
+              placeholder="Enter your password"
               {...register("password", {
                 required: true,
               })}
